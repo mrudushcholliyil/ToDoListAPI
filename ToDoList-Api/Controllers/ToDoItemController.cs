@@ -17,33 +17,33 @@ namespace ToDoList_Api.Controllers
 
                 
         [HttpGet]
-        [Route("GetPaymentDetails")]
+        [Route("GetLists")]
         public IActionResult GetLists()
         {
             var result = _toDoItemService.GetLists();
             if (result == null)
             {
-                return NotFound("Payments not found");
+                return NotFound("Item not found");
             }
             return Ok(result);
         }        
 
         
         [HttpPut]
-        [Route("UpdatePaymentDetail")]
-        public IActionResult UpdateToDoItem(ToDoData paymentDetail)
+        [Route("UpdateToDoItem")]
+        public IActionResult UpdateToDoItem(ToDoData toDoData)
         {
-            var isUpdated = _toDoItemService.UpdateToDoItem(paymentDetail);
+            var isUpdated = _toDoItemService.UpdateToDoItem(toDoData);
             if (isUpdated == false)
             {
-                return NotFound("Payment not found");
+                return NotFound("item not found");
             }
             return Ok(isUpdated);
         }
 
                 
         [HttpPost]
-        [Route("AddPaymentDetail")]
+        [Route("AddToDoItem")]
         public IActionResult AddToDoItem(ToDoData toDoData)
         {
             var id = _toDoItemService.AddToDoItem(toDoData);
@@ -53,8 +53,8 @@ namespace ToDoList_Api.Controllers
 
                 
         [HttpDelete]
-        [Route("DeletePaymentDetail/{id}")]
-        public IActionResult DeletePaymentDetail(int id)
+        [Route("DeleteToDoItem/{id}")]
+        public IActionResult DeleteToDoItem(int id)
         {
             var isDeleted = _toDoItemService.DeleteToDoItem(id);
             if (isDeleted == false)

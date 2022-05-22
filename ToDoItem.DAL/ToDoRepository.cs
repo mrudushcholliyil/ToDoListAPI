@@ -25,7 +25,7 @@ namespace ToDoItem.DAL
                             INSERT INTO ToDo(Name,IsCompleted)
                             VALUES(@name,@isCompleted);
                             SELECT CAST(scope_identity() AS int)";
-            int paymentDetailId = 0;
+            int listId = 0;
 
             using (SqlConnection conn = new SqlConnection(_options.ConnectionString))
             {
@@ -33,12 +33,12 @@ namespace ToDoItem.DAL
                 using (SqlCommand comm = new SqlCommand(script, conn))
                 {
                     comm.Parameters.AddWithValue("@name", toDoData.Name);
-                    comm.Parameters.AddWithValue("@isCompleted", toDoData.IsCompleted);                    
-                    paymentDetailId = (int)comm.ExecuteScalar();
+                    comm.Parameters.AddWithValue("@isCompleted", toDoData.IsCompleted);
+                    listId = (int)comm.ExecuteScalar();
                     conn.Close();
                 }
             }
-            return paymentDetailId;
+            return listId;
         }
 
         public bool DeleteToDoItem(int id)
